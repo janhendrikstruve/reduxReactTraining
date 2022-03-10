@@ -1,12 +1,18 @@
-import { useGetCharactersQuery } from './features/apiSlice/apiSlice'
-import Card from './Components/Card/Card'
+import { useAppDispatch } from './hooks'
+import { nextPage, previousPage } from './features/changePageSlice/changePageSlice'
+import Card from './Components/Cards/Cards'
 import './App.css'
 
 
 function App() {
-  const { data, isLoading, isSuccess, isError, error } = useGetCharactersQuery()
+  const dispatch = useAppDispatch()
 
-  console.log(data?.results)
+  function handlePreviousPage () {
+    dispatch(previousPage())
+  }
+  function handleNextPage () {
+    dispatch(nextPage())
+  }
 
   return (
     <div className="App">
@@ -14,6 +20,8 @@ function App() {
       <main>
         <Card/>
       </main>
+      <button onClick={handlePreviousPage}>previous page</button>
+      <button onClick={handleNextPage}>next page</button>
     </div>
   )
 }

@@ -9,6 +9,7 @@ interface FavoriteTypes  {
 export default function Favorite ({ id }: FavoriteTypes) {
   const favorites = useAppSelector((state) => state.favorites.value)
   const dispatch = useAppDispatch()
+  
   const isFavorite = favorites.includes(id)
 
   function handleCLick () {

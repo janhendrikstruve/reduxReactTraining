@@ -1,9 +1,11 @@
 import { useGetCharactersQuery } from '../../features/apiSlice/apiSlice'
+import { useAppSelector } from '../../hooks'
 import Favorite from '../Favorite/Favorite'
-import './Card.css' 
+import './Cards.css' 
 
 export default function Card () {
-  const { data } = useGetCharactersQuery()
+  const page = useAppSelector(store => store.nextPage.value)
+  const { data } = useGetCharactersQuery(page)
 
   return (
     <main>

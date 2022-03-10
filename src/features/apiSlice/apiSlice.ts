@@ -34,8 +34,8 @@ export const apiSlice = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({ baseUrl: 'https://rickandmortyapi.com/api' }),
   endpoints: builder => ({
-      getCharacters: builder.query<Character, void>({
-      query: () => '/character' 
+      getCharacters: builder.query<Character, number>({
+      query: (page: number) => `/character/?page=${page}` 
     })
   })
 })

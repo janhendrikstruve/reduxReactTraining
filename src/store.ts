@@ -1,13 +1,14 @@
 // wie createStore (nimmt reducer und erstellt store), uebernimmt aber auch 
 // die implementation von Redux Dev-Tools, Thunk und mehr
 import { configureStore, createSlice } from '@reduxjs/toolkit'
-import { buildSlice } from '@reduxjs/toolkit/dist/query/core/buildSlice'
 import { apiSlice } from './features/apiSlice/apiSlice'
 import favoritesReducer from './features/favoritesSlice/favoritesSlice'
+import changePageReducer from './features/changePageSlice/changePageSlice'
 
 export const store = configureStore({
   reducer: {
     favorites: favoritesReducer,
+    nextPage: changePageReducer,
     [apiSlice.reducerPath]: apiSlice.reducer
   },
   middleware: getDefaultMiddleware => (
