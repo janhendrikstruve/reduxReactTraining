@@ -1,6 +1,7 @@
 import { useAppDispatch } from './hooks'
 import { nextPage, previousPage } from './features/changePageSlice/changePageSlice'
 import Card from './Components/Cards/Cards'
+import DetailCard from './Components/DetailCard/DetailCard'
 import './App.css'
 
 
@@ -22,6 +23,7 @@ function App() {
       </main>
       <button onClick={handlePreviousPage}>previous page</button>
       <button onClick={handleNextPage}>next page</button>
+      <DetailCard/>
     </div>
   )
 }
