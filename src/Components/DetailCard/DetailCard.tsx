@@ -1,28 +1,21 @@
-import { useGetCharactersQuery } from '../../features/apiSlice/apiSlice'
-import { setDisplayedCharacter, isDisplayed } from '../../features/detailCardSlice/detailCardSlice'
+import { unsetDisplayedCharacter } from '../../features/detailCardSlice/detailCardSlice'
 import { useAppSelector, useAppDispatch } from '../../hooks'
-import { CharacterType, fetchedCharacterType } from '../../types'
+import { CharacterType } from '../../types'
 import Favorite from '../Favorite/Favorite'
 import './DetailCard.css'
 
 export default function DetailCard () {
-  const { characterId, showCharacter } = useAppSelector(state => state.detailCard)
-  const characters = useGetCharactersQuery(characterId).data?.results
-
-  const page = useAppSelector(state => state.changePage)
+  const { characterdata, showCharacter}  = useAppSelector(state => state.detailCard)
   const dispatch = useAppDispatch()
   
-
   function handleCloseDetails () {
-    dispatch(setDisplayedCharacter(0))
-    dispatch(isDisplayed(false))
+    dispatch(unsetDisplayedCharacter())
   }
 
-  if (!characters || !showCharacter) return <></>
+  const { id, name, species, status, image } = characterdata
 
-  const detailCharacter = characters.find((character: fetchedCharacterType) => character.id ===  characterId)
+  if(!showCharacter) return <></>
 
-  const { id, name, species, status, image } = detailCharacter
   return (
     <>
       <section key={id} className="DetailCard">

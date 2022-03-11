@@ -1,27 +1,48 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { CharacterType } from '../../types'
 
 interface InitialState {
-  characterId: number,
   showCharacter: boolean
+  characterdata: {
+  id: number, 
+  name: string
+  status: string
+  species: string
+  image: string
+}
 }
 
 const initialState: InitialState = {
-  characterId: 0,
-  showCharacter: false
+  showCharacter: false,
+  characterdata: {
+    id: 0,
+    name: '',
+    status: '',
+    species: '',
+    image: ''
+  }
 }
 
 const detailCardSlice = createSlice({
   name: 'detailCard',
   initialState,
   reducers: {
-    setDisplayedCharacter: (card, action: PayloadAction<number>) => {
-      card.characterId = action.payload
+    setDisplayedCharacter: (card, action: PayloadAction<CharacterType>) => {
+      card.characterdata = action.payload
+      card.showCharacter = true
     },
-    isDisplayed: (card, action: PayloadAction<boolean>) => {
-      card.showCharacter = action.payload
+    unsetDisplayedCharacter: (card) => {
+      card.showCharacter = false
+      card.characterdata = {
+        id: 0,
+        name: '',
+        status: '',
+        species: '',
+        image: ''
+      }
     }
   }
 });
 
-export const { setDisplayedCharacter, isDisplayed } = detailCardSlice.actions
+export const { setDisplayedCharacter, unsetDisplayedCharacter } = detailCardSlice.actions
 export default detailCardSlice.reducer
